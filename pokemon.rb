@@ -1,5 +1,3 @@
-require './health'  # ~> LoadError: cannot load such file -- ./health
-
 class Charizard
 
   attr_accessor :hp,
@@ -14,6 +12,27 @@ class Charizard
       "FlameThrower" => 95
       "FireSpin" => 15
     }
+  end
+
+  def check_hp
+    @hp
+  end
+
+  def take_damage(pokemon, amount)
+    if amount > check_hp
+      fainted(pokemon)
+    else
+      @hp -= amount
+    end
+  end
+
+  def restore_hp(pokemon, amount)
+    @hp += amount
+  end
+
+  def fainted(pokemon)
+    @hp = 0
+    "#{pokemon.upcase} fainted!"
   end
 
   def attack(attack)
