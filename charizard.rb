@@ -1,16 +1,18 @@
 class Charizard
 
-  attr_accessor :hp,
+  attr_accessor :name,
+                :hp,
                 :attack_list
 
   def initialize
+    @name = "Charizard"
     @hp = 100
     @type = ["fire", "flying"]
     @attack_list = {
-      "Rage" => 20
-      "Slash" => 70
-      "FlameThrower" => 95
-      "FireSpin" => 15
+      "rage" => 20,
+      "slash" => 70,
+      "flameThrower" => 95,
+      "fireSpin" => 15
     }
   end
 
@@ -46,16 +48,3 @@ class Charizard
   end
 
 end
-
-
-#Rage
-#Slash
-#FlameThrower
-#fire spin
-
-# ~> LoadError
-# ~> cannot load such file -- ./health
-# ~>
-# ~> /Users/adamki/.rvm/rubies/ruby-2.2.1/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-# ~> /Users/adamki/.rvm/rubies/ruby-2.2.1/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-# ~> /Users/adamki/Turing/module1/week_4/pokemon-battle/pokemon.rb:1:in `<main>'
