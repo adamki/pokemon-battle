@@ -9,10 +9,10 @@ class Charizard
     @hp = 100
     @type = ["fire", "flying"]
     @attack_list = {
-      "rage" => 20,
+      "rage" => 200,
       "slash" => 70,
-      "flameThrower" => 95,
-      "fireSpin" => 15
+      "flamethrower" => 95,
+      "firespin" => 15
     }
   end
 
@@ -35,10 +35,6 @@ class Charizard
   def fainted(pokemon)
     @hp = 0
     "#{pokemon.upcase} fainted!"
-  end
-
-  def attack(attack)
-
   end
 
   def learn_attack

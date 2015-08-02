@@ -51,6 +51,11 @@ class Battle
     end
   end
 
+  def fainted(pokemon)
+    @hp = 0
+    "#{pokemon.upcase} fainted!"
+  end
+
   def battle
     attacks = @current_pokemon.attack_list.keys.each do |attack|
       puts attack
@@ -60,34 +65,39 @@ class Battle
 
     if user_attack == attacks[0]
       damage = @current_pokemon.attack_list[user_attack]
+      @current_opponent.hp -= damage
       puts "#{@current_pokemon.name} used #{attacks[0]} against #{@current_opponent.name}"
       gets
-      puts "#{@current_opponent.name} lost #{damage} HP!"
+      puts "#{@current_opponent.name} lost #{damage} HP! #{@current_opponent.hp} left"
       opponent_turn
     elsif user_attack == attacks[1]
       damage = @current_pokemon.attack_list[user_attack]
       puts "#{@current_pokemon.name} used #{attacks[1]} against #{@current_opponent.name}"
       gets
-      puts "#{@current_opponent.name} lost #{damage} HP!"
+      puts "#{@current_opponent.name} lost #{damage} HP! #{@current_opponent.hp} left"
       opponent_turn
     elsif user_attack == attacks[2]
       damage = @current_pokemon.attack_list[user_attack]
       puts "#{@current_pokemon.name} used #{attacks[2]} against #{@current_opponent.name}"
       gets
-      puts "#{@current_opponent.name} lost #{damage} HP!"
+      puts "#{@current_opponent.name} lost #{damage} HP! #{@current_opponent.hp} left"
       opponent_turn
     elsif user_attack == attacks[3]
       damage = @current_pokemon.attack_list[user_attack]
       puts "#{@current_pokemon.name} used #{attacks[3]} against #{@current_opponent.name}"
       gets
-      puts "#{@current_opponent.name} lost #{damage} HP!"
+      puts "#{@current_opponent.name} lost #{damage} HP! #{@current_opponent.hp} left"
       opponent_turn
     else
       puts "please enter a valid input."
       battle
     end
-    opponent_turn
-    require "pry";binding.pry
+    if @current_opponent.hp <= 0
+      fainted(@current_opponent.name)
+      require "pry";binding.pry
+    else
+      opponent_turn
+    end
   end
 
   def opponent_attack_choice
@@ -102,28 +112,31 @@ class Battle
       @current_pokemon.hp -= damage
       puts "#{@current_opponent.name} used #{attacks[0]} against #{@current_pokemon.name}"
       gets
-      puts "#{@current_pokemon.name} lost #{damage} HP!"
+      puts "#{@current_pokemon.name} lost #{damage} HP!  #{@current_pokemon.hp} left"
     elsif opponent_attack == 1
       damage = @current_opponent.attack_list[attacks[opponent_attack]]
       @current_pokemon.hp -= damage
       puts "#{@current_opponent.name} used #{attacks[1]} against #{@current_pokemon.name}"
       gets
-      puts "#{@current_pokemon.name} lost #{damage} HP!"
+      puts "#{@current_pokemon.name} lost #{damage} HP!   #{@current_pokemon.hp} left"
     elsif opponent_attack == 2
       damage = @current_opponent.attack_list[attacks[opponent_attack]]
       @current_pokemon.hp -= damage
       puts "#{@current_opponent.name} used #{attacks[2]} against #{@current_pokemon.name}"
       gets
-      puts "#{@current_pokemon.name} lost #{damage} HP!"
+      puts "#{@current_pokemon.name} lost #{damage} HP!  #{@current_pokemon.hp} left"
     elsif opponent_attack == 3
       damage = @current_opponent.attack_list[attacks[opponent_attack]]
       @current_pokemon.hp -= damage
       puts "#{@current_opponent.name} used #{attacks[3]} against #{@current_pokemon.name}"
       gets
-      puts "#{@current_pokemon.name} lost #{damage} HP!"
+      puts "#{@current_pokemon.name} lost #{damage} HP!  #{@current_pokemon.hp} left"
     end
-
-    battle
+    if @current_pokemon.hp <= 0
+      fainted(@current_pokemon.name)
+    else
+      battle
+    end
   end
 
   def choose_pokemon
