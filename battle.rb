@@ -99,6 +99,7 @@ class Battle
       opponent_turn
     end
   end
+#is this good enought?
 
   def opponent_attack_choice
     rand 0..3
